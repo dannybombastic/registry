@@ -201,7 +201,7 @@ CREATE INDEX idx_servers_json_packages ON servers USING GIN((value->'packages'))
 
 -- Update $schema field to latest version for all entries
 UPDATE servers
-SET value = jsonb_set(value, '{$schema}', '"https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json"')
+SET value = jsonb_set(value, '{$schema}', '"https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json"')
 WHERE value ? '$schema' AND value IS NOT NULL;
 
 -- Add check constraints for data integrity

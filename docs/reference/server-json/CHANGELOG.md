@@ -110,9 +110,9 @@ Publishers using OCI or MCPB packages can now omit the `version` field, as it's 
 ```
 
 ### Schema Version
-- Schema version: `2025-09-29` → `2025-10-11`
+- Schema version: `2025-10-17` → `2025-10-11`
 
-## 2025-09-29
+## 2025-10-17
 
 ### ⚠️ BREAKING CHANGES
 
@@ -128,9 +128,9 @@ Removed registry-managed fields from publisher-controlled server.json schema.
 Publishers should remove these fields from their `server.json` files. The registry will manage server status and official metadata separately.
 
 ### Changed
-- Schema version: `2025-09-16` → `2025-09-29`
+- Schema version: `2025-10-17` → `2025-10-17`
 
-## 2025-09-16
+## 2025-10-17
 
 ### ⚠️ BREAKING CHANGES
 
@@ -244,10 +244,10 @@ All JSON field names standardized to camelCase. **All existing `server.json` fil
 
 #### Updated Schema Reference
 
-🔗 **Current schema**: https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json
+🔗 **Current schema**: https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json
 
 ### Changed
-- Schema version: `2025-07-09` → `2025-09-16`
+- Schema version: `2025-07-09` → `2025-10-17`
 
 ## 2025-07-09
 

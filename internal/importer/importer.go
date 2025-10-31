@@ -13,6 +13,7 @@ import (
 	"github.com/modelcontextprotocol/registry/internal/service"
 	"github.com/modelcontextprotocol/registry/internal/validators"
 	apiv0 "github.com/modelcontextprotocol/registry/pkg/api/v0"
+	"github.com/modelcontextprotocol/registry/pkg/model"
 )
 
 // Service handles importing seed data into the registry
@@ -40,6 +41,12 @@ func (s *Service) ImportFromPath(ctx context.Context, path string) error {
 	var failedCreations []string
 
 	for _, server := range servers {
+		// Auto-migrate old schema versions to current version before creating
+		if server.Schema != "" && !strings.Contains(server.Schema, model.CurrentSchemaVersion) {
+			log.Printf("Auto-migrating server '%s' from schema %s to %s", server.Name, server.Schema, model.CurrentSchemaURL)
+			server.Schema = model.CurrentSchemaURL
+		}
+
 		_, err := s.registry.CreateServer(ctx, server)
 		if err != nil {
 			failedCreations = append(failedCreations, fmt.Sprintf("%s: %v", server.Name, err))
@@ -98,17 +105,17 @@ func readSeedFile(ctx context.Context, path string) ([]*apiv0.ServerJSON, error)
 	var invalidServers []string
 	var validationFailures []string
 
-	for _, response := range serverResponses {
-		if err := validators.ValidateServerJSON(&response); err != nil {
+	for i := range serverResponses {
+		if err := validators.ValidateServerJSON(&serverResponses[i]); err != nil {
 			// Log warning and track invalid server instead of failing
-			invalidServers = append(invalidServers, response.Name)
-			validationFailures = append(validationFailures, fmt.Sprintf("Server '%s': %v", response.Name, err))
-			log.Printf("Warning: Skipping invalid server '%s': %v", response.Name, err)
+			invalidServers = append(invalidServers, serverResponses[i].Name)
+			validationFailures = append(validationFailures, fmt.Sprintf("Server '%s': %v", serverResponses[i].Name, err))
+			log.Printf("Warning: Skipping invalid server '%s': %v", serverResponses[i].Name, err)
 			continue
 		}
 
 		// Add valid ServerJSON to records
-		validRecords = append(validRecords, &response)
+		validRecords = append(validRecords, &serverResponses[i])
 	}
 
 	// Print summary of validation results

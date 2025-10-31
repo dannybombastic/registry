@@ -1,6 +1,6 @@
 services:
   registry:
-    image: modelcontextprotocol/registry:dev
+    image: dannybombastic/registry:dev
     pull_policy: never
     container_name: registry
     build:
@@ -12,7 +12,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    # See .env.example for more documentation
+    env_file: .env.example
     environment:
       - MCP_REGISTRY_DATABASE_URL=${MCP_REGISTRY_DATABASE_URL:-postgres://mcpregistry:mcpregistry@postgres:5432/mcp-registry}
       - MCP_REGISTRY_ENVIRONMENT=${MCP_REGISTRY_ENVIRONMENT:-test}

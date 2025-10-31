@@ -31,7 +31,7 @@ Removed redundant endpoint to simplify API surface and reduce implementation bur
 **Removed endpoints:**
 - `GET /v0/servers/{serverName}` - Use `GET /v0/servers/{serverName}/versions/latest` instead
 
-## 2025-09-29
+## 2025-10-17
 
 ### ⚠️ BREAKING CHANGES
 
@@ -53,9 +53,9 @@ API endpoints updated to use server names instead of server IDs for better usabi
 - Removed `io.modelcontextprotocol.registry/official` metadata from `ServerDetail` schema
 
 ### Changed
-- OpenAPI spec version: `2025-09-16` → `2025-09-29`
+- OpenAPI spec version: `2025-10-17` → `2025-10-17`
 
-## 2025-09-16
+## 2025-10-17
 
 ### ⚠️ BREAKING CHANGES
 
@@ -116,7 +116,7 @@ API endpoints updated for consistent server identification across versions.
 - [ ] Test with new API responses
 
 ### Changed
-- OpenAPI spec version: `2025-07-09` → `2025-09-16`
+- OpenAPI spec version: `2025-07-09` → `2025-10-17`
 
 ## 2025-07-09
 

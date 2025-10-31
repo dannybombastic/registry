@@ -74,7 +74,7 @@ WHERE value IS NOT NULL;
 
 -- Update $schema field to latest version if it exists
 UPDATE servers
-SET value = jsonb_set(value, '{$schema}', '"https://static.modelcontextprotocol.io/schemas/2025-09-16/server.schema.json"')
+SET value = jsonb_set(value, '{$schema}', '"https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json"')
 WHERE value ? '$schema' AND value IS NOT NULL;
 
 -- Clean up the helper function
